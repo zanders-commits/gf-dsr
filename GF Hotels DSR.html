@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GF Hotels × Reeco — Digital Sales Room</title>
+<meta name="description" content="Digital sales room prepared for Keith Schreiner, Patrick McLaughlin, Eric Regits, and Derek Lentz at GF Hotels.">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="icon" href="assets/reeco-mark.svg">
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: #fff; color: var(--fg-1); font-family: var(--font-sans); }
+::selection { background: var(--mint-100); color: var(--navy-900); }
+a { color: var(--fg-link); text-decoration: none; font-weight: var(--fw-semi); }
+a:hover { text-decoration: underline; }
+
+/* ── NAV ── */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.90); backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid var(--border-1); }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 20px; }
+.nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.nav-brand img { height: 22px; display: block; }
+.nav-divider { width: 1px; height: 20px; background: var(--stone-300); flex-shrink: 0; }
+.nav-context { font-size: 12px; color: var(--stone-700); font-weight: var(--fw-medium); white-space: nowrap; }
+.nav-context strong { color: var(--navy-900); font-weight: var(--fw-bold); }
+.nav-links { display: none; margin-left: auto; gap: 20px; align-items: center; }
+nav a { text-transform: none; }
+.nav-links a { color: var(--navy-900); font-size: 14px; font-weight: var(--fw-bold); text-decoration: none; white-space: nowrap; text-transform: none; }
+.nav-links a:hover { color: var(--mint-700); text-decoration: none; }
+.nav-cta { margin-left: auto; flex-shrink: 0; }
+@media (min-width: 980px) { .nav-links { display: flex; } .nav-cta { margin-left: 20px; } }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: var(--radius-xl); font-size: 14px; font-weight: var(--fw-semi); border: 1px solid transparent; cursor: pointer; transition: all var(--duration-med) var(--ease-out); text-decoration: none; font-family: var(--font-sans); }
+.btn-primary { background: var(--mint-500); color: #fff; }
+.btn-primary:hover { background: var(--mint-700); text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-ghost-hero { background: rgba(255,255,255,0.3); color: var(--navy-900); border-color: rgba(10,24,74,0.2); }
+.btn-ghost-hero:hover { background: rgba(255,255,255,0.5); text-decoration: none; }
+.btn-dark { background: var(--navy-900); color: #fff; }
+.btn-dark:hover { background: var(--navy-800); text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-lg { padding: 14px 26px; font-size: 15px; }
+.btn .arr { transition: transform var(--duration-med) var(--ease-out); }
+.btn:hover .arr { transform: translateX(3px); }
+
+/* ── SECTION SHELL ── */
+section { padding: 96px 32px; position: relative; }
+.container { max-width: 1200px; margin: 0 auto; }
+.eyebrow { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: 1px; color: var(--mint-700); display: inline-flex; align-items: center; gap: 8px; }
+.eyebrow::before { content: "///"; color: var(--mint-500); letter-spacing: 0; margin-right: 2px; }
+.section-title { font-size: 44px; font-weight: var(--fw-black); letter-spacing: -0.012em; line-height: 1.1; color: var(--navy-900); margin: 14px 0 16px; max-width: 880px; text-wrap: balance; }
+.section-sub { font-size: 17px; line-height: 1.6; color: var(--stone-700); max-width: 640px; margin: 0 0 48px; }
+@media (max-width: 720px) { section { padding: 64px 22px; } .section-title { font-size: 30px; } .section-sub { font-size: 15px; } }
+
+/* ── HERO ── */
+.hero { position: relative; overflow: hidden; background: var(--mint-500); color: var(--navy-900); padding: 56px 32px 0; }
+.hero::before { content: ""; position: absolute; inset: auto -120px -180px auto; width: 520px; height: 520px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.35fr 1fr; gap: 64px; align-items: start; padding-bottom: 120px; position: relative; z-index: 1; }
+.hero-page-id { display: inline-flex; align-items: center; background: rgba(255,255,255,0.5); border: 1px solid rgba(10,24,74,0.15); color: var(--navy-900); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: var(--fw-bold); letter-spacing: 0.1px; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(38px, 5.5vw, 72px); font-weight: var(--fw-black); letter-spacing: -0.025em; line-height: 1.02; color: var(--navy-900); margin: 0 0 16px; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: var(--navy-900); background: none; padding: 0; border-radius: 0; font-size: 0.6em; font-weight: var(--fw-regular); opacity: 0.42; margin: 0 0 0.04em; vertical-align: 0.22em; font-family: var(--font-sans); }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(10,24,74,0.12); color: var(--navy-900); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: var(--fw-semi); margin-bottom: 20px; }
+.hero-sub { font-size: 19px; line-height: 1.55; color: var(--navy-900); max-width: 540px; opacity: 0.85; margin: 0 0 24px; font-weight: var(--fw-medium); }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.hero-chip { display: inline-flex; align-items: center; background: rgba(255,255,255,0.5); border: 1px solid rgba(10,24,74,0.12); color: var(--navy-900); padding: 8px 14px; border-radius: var(--radius-xl); font-size: 13px; font-weight: var(--fw-medium); }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; padding-bottom: 100px; gap: 40px; } .hero { padding: 56px 22px 0; } }
+
+/* ── MEETING CARD ── */
+.meeting-card { background: #fff; border-radius: var(--radius-2xl); padding: 28px; box-shadow: var(--shadow-xl); color: var(--navy-900); }
+.meeting-eyebrow { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--mint-700); margin-bottom: 6px; }
+.meeting-title { font-size: 20px; font-weight: var(--fw-bold); color: var(--navy-900); margin: 0 0 20px; letter-spacing: -0.008em; line-height: 1.2; }
+.meeting-when { display: grid; grid-template-columns: 68px 1fr; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid var(--stone-200); }
+.meeting-date-chip { display: flex; flex-direction: column; align-items: center; background: var(--stone-200); border-radius: var(--radius-lg); padding: 10px 0; opacity: 0.55; }
+.meeting-date-chip .day { font-size: 22px; font-weight: var(--fw-black); color: var(--stone-500); line-height: 1; }
+.meeting-date-chip .mon { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-400); margin-top: 4px; }
+.meeting-when-meta { display: flex; flex-direction: column; gap: 4px; }
+.meeting-when-meta .l1 { font-size: 14px; font-weight: var(--fw-semi); color: var(--stone-500); font-style: italic; }
+.meeting-when-meta .l2 { font-size: 13px; color: var(--stone-700); font-weight: var(--fw-medium); line-height: 1.4; }
+.meeting-when-meta .l3 { font-size: 12px; color: var(--stone-500); line-height: 1.4; }
+.meeting-attendees { border-top: 1px solid var(--stone-200); padding-top: 18px; }
+.attendee-org-label { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-500); margin-bottom: 6px; }
+.attendee-org-label + .attendee-org-label, .attendee-row + .attendee-org-label { margin-top: 14px; }
+.attendee-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+.attendee-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: var(--fw-bold); flex-shrink: 0; }
+.attendee-avatar.gf { background: var(--mint-100); color: var(--mint-800); }
+.attendee-avatar.reeco { background: var(--navy-900); color: #fff; }
+.attendee-name { font-size: 13px; font-weight: var(--fw-bold); color: var(--navy-900); }
+.attendee-role { font-size: 11px; color: var(--stone-500); }
+
+/* ── HERO TIMELINE ── */
+.hero-timeline { position: relative; z-index: 1; max-width: 1200px; margin: -80px auto 0; padding: 28px 32px 64px; }
+.hero-timeline-card { background: #fff; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); padding: 26px 32px; display: grid; grid-template-columns: minmax(160px, auto) repeat(3, 1fr); gap: 24px; align-items: start; }
+.hero-tl-label { display: flex; flex-direction: column; gap: 4px; padding-top: 8px; }
+.ht-eyebrow { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--mint-700); }
+.ht-title { font-size: 17px; font-weight: var(--fw-bold); color: var(--navy-900); letter-spacing: -0.005em; line-height: 1.2; }
+.ht-step { display: flex; flex-direction: column; gap: 4px; padding-left: 22px; padding-top: 16px; border-left: 1px solid var(--stone-200); position: relative; }
+.ht-step::before { content: ""; position: absolute; left: -6px; top: 14px; width: 11px; height: 11px; border-radius: 50%; background: #fff; border: 2px solid var(--mint-500); box-shadow: 0 0 0 1px var(--stone-200); }
+.ht-step-num { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-500); }
+.ht-step-title { font-size: 13px; font-weight: var(--fw-bold); color: var(--navy-900); line-height: 1.3; }
+.ht-step-date { font-size: 12px; color: var(--stone-700); font-weight: var(--fw-medium); margin-top: 2px; }
+.ht-step.cta::before { background: var(--mint-500); }
+.ht-step-cta { margin-top: 6px; }
+@media (max-width: 900px) { .hero-timeline { margin-top: -60px; padding: 20px 22px 48px; } .hero-timeline-card { grid-template-columns: 1fr; gap: 18px; padding: 22px; } .ht-step { padding-left: 20px; padding-bottom: 16px; border-left: none; } .ht-step::before { left: 0; top: 4px; } }
+
+/* ── PROBLEM / SOLUTION PAIRS ── */
+.ps-pair { display: grid; grid-template-columns: 64px 1fr 48px 1fr; gap: 20px; align-items: stretch; padding: 36px 0; border-top: 1px solid var(--stone-200); }
+.ps-pair:first-child { border-top: none; padding-top: 0; }
+.ps-pair:last-child { padding-bottom: 0; }
+.ps-num { font-size: 60px; font-weight: var(--fw-black); letter-spacing: -0.03em; line-height: 1; color: var(--navy-900); font-feature-settings: "tnum"; }
+.ps-card { padding: 26px; border-radius: var(--radius-2xl); display: flex; flex-direction: column; }
+.ps-card.problem { background: var(--rose-100); border: 1px solid var(--rose-200); }
+.ps-card.answer { background: var(--mint-100); border: 1px solid var(--mint-200); }
+.ps-eyebrow { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+.ps-eyebrow.problem { color: #B81E63; }
+.ps-eyebrow.answer { color: var(--mint-800); }
+.ps-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ps-eyebrow.problem .ps-dot { background: var(--rose-500); }
+.ps-eyebrow.answer .ps-dot { background: var(--mint-500); }
+.ps-headline { font-size: 18px; font-weight: var(--fw-bold); color: var(--navy-900); margin: 0 0 10px; letter-spacing: -0.005em; line-height: 1.25; }
+.ps-body { font-size: 14px; line-height: 1.65; color: var(--stone-700); margin: 0; flex-grow: 1; }
+.ps-arrow { display: flex; align-items: center; justify-content: center; color: var(--mint-500); }
+@media (max-width: 900px) { .ps-pair { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; } .ps-num { font-size: 40px; } .ps-arrow { transform: rotate(90deg); margin: 0 auto; } }
+
+/* ── CALLOUT QUOTE ── */
+.callout-quote { margin-top: 56px; background: var(--navy-900); color: #fff; border-radius: var(--radius-3xl); padding: 44px 56px; display: grid; grid-template-columns: 72px 1fr; gap: 28px; align-items: start; position: relative; overflow: hidden; }
+.callout-quote.mint { background: var(--mint-500); color: var(--navy-900); }
+.callout-quote::before { content: ""; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+.callout-quote.mint::before { background: rgba(255,255,255,0.25); }
+.callout-mark { font-family: Georgia, serif; font-size: 100px; font-weight: 900; line-height: 0.6; color: var(--mint-300); position: relative; z-index: 1; }
+.callout-quote.mint .callout-mark { color: rgba(10,24,74,0.25); }
+.callout-body { position: relative; z-index: 1; }
+.callout-body p { font-size: 19px; line-height: 1.55; font-weight: var(--fw-medium); margin: 0 0 24px; color: inherit; letter-spacing: -0.005em; }
+.callout-attr { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.18); }
+.callout-quote.mint .callout-attr { border-top-color: rgba(10,24,74,0.2); }
+.callout-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--mint-300); color: var(--navy-900); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: var(--fw-black); flex-shrink: 0; }
+.callout-quote.mint .callout-avatar { background: var(--navy-900); color: #fff; }
+.callout-name { font-size: 15px; font-weight: var(--fw-bold); color: inherit; }
+.callout-meta { font-size: 13px; opacity: 0.75; margin-top: 2px; }
+@media (max-width: 720px) { .callout-quote { padding: 32px 28px; grid-template-columns: 1fr; gap: 8px; } .callout-mark { font-size: 64px; } .callout-body p { font-size: 16px; } }
+
+/* ── PLATFORM ── */
+.platform-section { background: var(--stone-100); }
+.platform-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.platform-card { background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-2xl); padding: 32px; display: flex; flex-direction: column; }
+.platform-card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--stone-200); }
+.platform-icon { width: 44px; height: 44px; border-radius: var(--radius-lg); background: var(--mint-100); color: var(--mint-800); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.platform-card h3 { font-size: 19px; font-weight: var(--fw-bold); color: var(--navy-900); margin: 0; letter-spacing: -0.01em; line-height: 1.2; }
+.platform-card p { font-size: 14px; line-height: 1.65; color: var(--stone-700); margin: 0; }
+.platform-card p strong { color: var(--navy-900); font-weight: var(--fw-bold); }
+@media (max-width: 900px) { .platform-grid { grid-template-columns: 1fr; } }
+
+/* ── PRICING ── */
+.pricing-section { background: var(--navy-900); }
+.pricing-section .eyebrow { color: var(--mint-300); }
+.pricing-section .eyebrow::before { color: var(--mint-300); }
+.pricing-section .section-title { color: #fff; }
+.pricing-section .section-sub { color: rgba(255,255,255,0.75); }
+.pricing-v2 { background: #fff; border-radius: var(--radius-3xl); padding: 48px; color: var(--navy-900); box-shadow: var(--shadow-xl); }
+.pricing-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.pricing-table thead th { text-align: left; padding: 0 14px 14px; font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-500); border-bottom: 2px solid var(--stone-200); }
+.pricing-table thead th:not(:first-child):not(:nth-child(2)) { text-align: right; }
+.pricing-table tbody td { padding: 18px 14px; border-bottom: 1px solid var(--stone-200); font-size: 14px; color: var(--navy-900); vertical-align: middle; }
+.pricing-table tbody td:first-child { padding-left: 0; }
+.pricing-table tbody td:not(:first-child):not(:nth-child(2)) { text-align: right; }
+.pricing-table tbody tr:last-child td { border-bottom: none; }
+.pricing-tier { font-size: 15px; font-weight: var(--fw-bold); color: var(--navy-900); line-height: 1.3; }
+.pricing-tier .sub { display: block; font-size: 12px; font-weight: var(--fw-medium); color: var(--stone-500); margin-top: 3px; }
+.pricing-amount { font-weight: var(--fw-bold); display: block; }
+.disc-pct { display: block; font-size: 11px; font-weight: var(--fw-semi); color: var(--stone-400); margin-top: 2px; letter-spacing: 0.01em; }
+.pricing-listprice { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--stone-500); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--stone-200); flex-wrap: wrap; }
+.pricing-listprice .lp-label { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.2px; color: var(--stone-400); text-transform: uppercase; margin-right: 4px; }
+.pricing-listprice .lp-item { display: inline-flex; gap: 4px; color: var(--stone-500); font-weight: var(--fw-medium); }
+.pricing-listprice .lp-sep { color: var(--stone-300); }
+.optional-chip { display: inline-flex; background: var(--stone-100); border: 1px solid var(--stone-200); border-radius: 999px; font-size: 11px; font-weight: var(--fw-semi); color: var(--stone-500); padding: 3px 10px; }
+.pricing-v2-discount { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: var(--fw-semi); color: var(--mint-800); background: var(--mint-100); padding: 8px 14px; border /* legacy */-radius: var(--radius-lg); }
+.pricing-terms { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 24px; padding: 18px 22px; background: var(--navy-100); border-radius: var(--radius-lg); }
+.pricing-terms-item .lbl { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-500); display: block; margin-bottom: 3px; }
+.pricing-terms-item .val { font-size: 13px; font-weight: var(--fw-bold); color: var(--navy-900); }
+.pricing-link-panel { background: var(--navy-100); border-radius: var(--radius-xl); padding: 22px 26px; margin-top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.pricing-link-panel p { font-size: 14px; line-height: 1.55; color: var(--stone-700); margin: 0; max-width: 520px; }
+.pricing-footer { display: flex; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+
+/* ── SETUP WAIVED BANNER ── */
+.setup-waived-banner { margin-top: 28px; background: var(--navy-900); border-radius: var(--radius-2xl); padding: 32px; overflow: hidden; position: relative; }
+.setup-waived-banner::before { content: '///'; position: absolute; right: 32px; top: 50%; transform: translateY(-50%); font-size: 96px; font-weight: 900; color: rgba(255,255,255,0.04); letter-spacing: -4px; line-height: 1; pointer-events: none; }
+.setup-waived-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+.setup-waived-headline { display: flex; flex-direction: column; gap: 6px; }
+.setup-waived-eyebrow { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--mint-500); text-transform: uppercase; }
+.setup-waived-title { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.02em; line-height: 1.2; }
+.setup-waived-sub { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-top: 4px; max-width: 380px; }
+.setup-waived-total { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+.setup-waived-total-val { font-size: 36px; font-weight: 900; color: var(--mint-500); letter-spacing: -0.03em; line-height: 1; }
+.setup-waived-total-label { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1px; color: rgba(255,255,255,0.4); text-transform: uppercase; text-align: right; }
+.setup-waived-tiers { display: flex; gap: 12px; flex-wrap: wrap; }
+.setup-waived-tier { flex: 1; min-width: 200px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.swt-label { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1px; color: rgba(255,255,255,0.45); text-transform: uppercase; }
+.swt-math { font-size: 13px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 6px; }
+.swt-math strong { color: #fff; font-weight: var(--fw-bold); }
+.swt-total { font-size: 20px; font-weight: 900; color: var(--mint-500); letter-spacing: -0.02em; }
+
+/* ── PRICING EMBED ── */
+.pricing-embed-label { display: flex; align-items: center; gap: 12px; margin-top: 32px; margin-bottom: 14px; flex-wrap: wrap; }
+.pricing-embed-eyebrow { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: 1px; color: var(--mint-700); }
+.pricing-embed-desc { font-size: 13px; color: var(--stone-500); font-weight: var(--fw-medium); }
+.pricing-embed-popout { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: var(--fw-semi); color: var(--stone-500); text-decoration: none; padding: 6px 12px; border: 1px solid var(--stone-200); border-radius: var(--radius-lg); transition: all var(--duration-med) var(--ease-out); flex-shrink: 0; }
+.pricing-embed-popout:hover { color: var(--navy-900); border-color: var(--stone-400); text-decoration: none; }
+.pricing-iframe-wrap { border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--stone-200); box-shadow: var(--shadow-lg); background: #fff; }
+.pricing-iframe { display: block; width: 100%; height: 820px; border: none; }
+
+@media (max-width: 720px) { .pricing-v2 { padding: 28px; } .pricing-table thead { display: none; } .pricing-table tbody tr { display: block; padding: 18px 0; border-bottom: 1px solid var(--stone-200); } .pricing-table tbody td { display: block; padding: 4px 0 !important; border: none; text-align: left !important; } .pricing-iframe { height: 620px; } }
+
+/* ── INTEGRATION ── */
+.integration-section { background: var(--stone-100); }
+.stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 44px; }
+.stack-card { background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-xl); padding: 24px; }
+.stack-card.connect { border-color: var(--mint-200); }
+.stack-card.replace { border-color: var(--rose-200); background: var(--rose-100); }
+.stack-card-type { font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 1.5px; color: var(--stone-500); margin-bottom: 8px; }
+.stack-card-name { font-size: 18px; font-weight: var(--fw-bold); color: var(--navy-900); margin-bottom: 12px; letter-spacing: -0.01em; line-height: 1.2; }
+.stack-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: var(--fw-bold); padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
+.stack-status.connect { background: var(--mint-100); color: var(--mint-800); }
+.stack-status.replace { background: var(--rose-100); color: #B81E63; border: 1px solid var(--rose-200); }
+.stack-detail { font-size: 13px; line-height: 1.55; color: var(--stone-700); }
+@media (max-width: 900px) { .stack-grid { grid-template-columns: 1fr; } }
+.impl-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.impl-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-xl); }
+.impl-check { width: 24px; height: 24px; border-radius: 50%; background: var(--mint-100); color: var(--mint-800); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.impl-text { font-size: 14px; line-height: 1.55; color: var(--stone-700); }
+.impl-text strong { color: var(--navy-900); font-weight: var(--fw-bold); }
+.timeline { background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-2xl); overflow: hidden; }
+.timeline-header { padding: 22px 28px; border-bottom: 1px solid var(--stone-200); }
+.timeline-header h3 { font-size: 17px; font-weight: var(--fw-bold); color: var(--navy-900); margin: 0; }
+.timeline-rows { display: flex; flex-direction: column; }
+.timeline-row { display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: start; padding: 20px 28px; border-top: 1px solid var(--stone-200); }
+.timeline-row:first-child { border-top: none; }
+.t-phase { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: 1.2px; color: var(--mint-700); display: flex; align-items: center; gap: 8px; padding-top: 2px; }
+.t-phase .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint-500); flex-shrink: 0; }
+.t-activity { font-size: 14.5px; color: var(--navy-900); font-weight: var(--fw-medium); line-height: 1.45; }
+.t-activity span { display: block; font-size: 13px; color: var(--stone-700); font-weight: var(--fw-regular); margin-top: 4px; line-height: 1.5; }
+@media (max-width: 720px) { .timeline-row { grid-template-columns: 1fr; gap: 6px; } }
+
+/* ── COLLATERAL ── */
+.collateral-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.collateral-card { display: grid; grid-template-columns: 52px 1fr auto; gap: 16px; align-items: center; padding: 20px 22px; background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-xl); text-decoration: none; transition: all var(--duration-med) var(--ease-out); }
+.collateral-card:hover { border-color: var(--mint-500); box-shadow: var(--shadow-md); text-decoration: none; transform: translateY(-2px); }
+.collateral-card.no-link { cursor: default; }
+.collateral-card.no-link:hover { border-color: var(--stone-200); box-shadow: none; transform: none; }
+.collateral-icon { width: 52px; height: 52px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.collateral-icon.deck { background: var(--mint-100); color: var(--mint-800); }
+.collateral-icon.notes { background: var(--sky-100); color: #1A6FA8; }
+.collateral-icon.pricing { background: var(--navy-100); color: var(--navy-900); }
+.collateral-icon.lock { background: var(--sun-100); color: #8C6A00; }
+.collateral-title { font-size: 15px; font-weight: var(--fw-bold); color: var(--navy-900); margin-bottom: 4px; }
+.collateral-desc { font-size: 12.5px; color: var(--stone-700); line-height: 1.45; }
+.collateral-arr { color: var(--stone-400); transition: color var(--duration-med) var(--ease-out), transform var(--duration-med) var(--ease-out); }
+.collateral-card:hover .collateral-arr { color: var(--mint-700); transform: translateX(3px); }
+@media (max-width: 720px) { .collateral-grid { grid-template-columns: 1fr; } }
+
+/* ── FAQ ── */
+.faq-section { background: var(--stone-100); }
+.faq-list { display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: #fff; border: 1px solid var(--stone-200); border-radius: var(--radius-xl); overflow: hidden; transition: border-color var(--duration-med) var(--ease-out); }
+.faq-item[open] { border-color: var(--mint-300); box-shadow: var(--shadow-sm); }
+.faq-q { padding: 22px 28px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 16px; font-weight: var(--fw-bold); color: var(--navy-900); letter-spacing: -0.005em; line-height: 1.35; }
+.faq-q::-webkit-details-marker { display: none; }
+.faq-toggle { width: 28px; height: 28px; border-radius: 50%; background: var(--stone-200); color: var(--navy-900); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all var(--duration-med) var(--ease-out); }
+.faq-item[open] .faq-toggle { background: var(--mint-500); color: #fff; transform: rotate(45deg); }
+.faq-a { padding: 0 28px 24px; font-size: 15px; line-height: 1.65; color: var(--stone-700); }
+.faq-a strong { color: var(--navy-900); }
+
+/* ── CONTACT ── */
+.contact-section { background: var(--navy-900); color: #fff; position: relative; overflow: hidden; }
+.contact-section::before { content: ""; position: absolute; bottom: -200px; right: -100px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(43,204,137,0.28), transparent 70%); border-radius: 50%; pointer-events: none; }
+.contact-section .eyebrow { color: var(--mint-300); }
+.contact-section .eyebrow::before { color: var(--mint-300); }
+.contact-section .section-title { color: #fff; }
+.contact-section .section-sub { color: rgba(255,255,255,0.75); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; position: relative; z-index: 1; }
+.contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-2xl); padding: 28px; }
+.contact-card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.contact-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--mint-500); color: var(--navy-900); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: var(--fw-black); flex-shrink: 0; }
+.contact-name { font-size: 18px; font-weight: var(--fw-bold); color: #fff; }
+.contact-role { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.contact-link { display: inline-flex; align-items: center; gap: 8px; color: var(--mint-300); font-size: 14px; font-weight: var(--fw-semi); padding: 10px 14px; background: rgba(43,204,137,0.12); border-radius: var(--radius-md); text-decoration: none; margin-top: 6px; }
+.contact-link:hover { background: rgba(43,204,137,0.22); text-decoration: none; }
+.booking-card { background: var(--mint-500); border-radius: var(--radius-2xl); padding: 36px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; position: relative; z-index: 1; }
+.booking-card h3 { font-size: 28px; font-weight: var(--fw-black); color: var(--navy-900); margin: 0 0 8px; letter-spacing: -0.015em; line-height: 1.15; }
+.booking-card p { font-size: 15px; color: var(--navy-900); opacity: 0.8; margin: 0; line-height: 1.55; font-weight: var(--fw-medium); }
+.booking-cta { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.booking-sub { font-size: 12px; color: var(--navy-900); opacity: 0.65; text-align: right; }
+@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } .booking-card { grid-template-columns: 1fr; padding: 28px 22px; } .booking-cta { align-items: stretch; } .booking-card h3 { font-size: 22px; } }
+
+/* ── FOOTER ── */
+footer { background: #fff; padding: 36px 32px; border-top: 1px solid var(--stone-200); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.footer-brand { display: flex; align-items: center; gap: 14px; }
+.footer-brand img { height: 22px; display: block; }
+.footer-note { font-size: 12px; color: var(--stone-500); line-height: 1.5; }
+.footer-links { display: flex; gap: 20px; align-items: center; }
+.footer-links a { font-size: 12px; color: var(--stone-500); font-weight: var(--fw-medium); text-decoration: none; }
+.footer-links a:hover { color: var(--mint-700); }
+
+/* ── SCROLL REVEAL ── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="Reeco home">
+      <img src="assets/reeco-logo-primary-green.svg" alt="Reeco">
+    </a>
+    <div class="nav-divider" aria-hidden="true"></div>
+    <div class="nav-context">Prepared for <strong>GF Hotels</strong></div>
+    <div class="nav-links">
+      <a href="#problem">Problem &amp; Solution</a>
+      <a href="#platform">Platform</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#integration">Integration</a>
+      <a href="#library">Library</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#booking" class="btn btn-primary nav-cta">Schedule 30 Minutes <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- ── SECTION 01: HERO ── -->
+<section class="hero" id="top" data-screen-label="Hero">
+  <div class="hero-inner">
+
+    <!-- Left column -->
+    <div>
+      <div class="hero-page-id">GF Hotels × Reeco Digital Sales Room</div>
+      <h1>GF Hotels <em>&times;</em> Reeco</h1>
+      <div class="hero-eyebrow">● Digital Sales Room</div>
+      <p class="hero-sub">A hospitality-native procurement platform built to replace complexity with clarity, across purchasing, AP automation, inventory, and culinary management.</p>
+      <div class="hero-chips">
+        <span class="hero-chip">Built for GF Hotels</span>
+        <span class="hero-chip">Full-Service + Select-Service Portfolio</span>
+        <span class="hero-chip">M3 + ProfitSword Connected</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-dark btn-lg">Schedule 30 Minutes with Zander <span class="arr">→</span></a>
+        <a href="#problem" class="btn btn-ghost-hero btn-lg">See the Solution ↓</a>
+      </div>
+    </div>
+
+    <!-- Right column: Meeting Card -->
+    <div class="meeting-card">
+      <div class="meeting-eyebrow">Next Step</div>
+      <div class="meeting-title">Pricing Proposal Review — Schedule below.</div>
+      <div class="meeting-when">
+        <div class="meeting-date-chip">
+          <span class="day">—</span>
+          <span class="mon">TBD</span>
+        </div>
+        <div class="meeting-when-meta">
+          <div class="l1">Date to be confirmed</div>
+          <div class="l2">Schedule a 30-minute call with Zander and Paul</div>
+          <div class="l3">Demo + Proposal Review · 30 Minutes</div>
+        </div>
+      </div>
+      <div class="meeting-attendees">
+        <div class="attendee-org-label">GF Hotels</div>
+        <div class="attendee-row">
+          <div class="attendee-avatar gf">KS</div>
+          <div>
+            <div class="attendee-name">Keith Schreiner</div>
+            <div class="attendee-role">Chief Financial Officer</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="attendee-avatar gf">PM</div>
+          <div>
+            <div class="attendee-name">Patrick McLaughlin</div>
+            <div class="attendee-role">Director of Operational Analytics</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="attendee-avatar gf">ER</div>
+          <div>
+            <div class="attendee-name">Eric Regits</div>
+            <div class="attendee-role">VP of Operations</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="attendee-avatar gf">DL</div>
+          <div>
+            <div class="attendee-name">Derek Lentz</div>
+            <div class="attendee-role">Controller</div>
+          </div>
+        </div>
+        <div class="attendee-org-label" style="margin-top:14px;">Reeco</div>
+        <div class="attendee-row">
+          <div class="attendee-avatar reeco">ZS</div>
+          <div>
+            <div class="attendee-name">Zander Srodes</div>
+            <div class="attendee-role">Head of Enterprise Sales</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="attendee-avatar reeco">PB</div>
+          <div>
+            <div class="attendee-name">Paul Bennie</div>
+            <div class="attendee-role">SVP Revenue and Customer Success</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HERO TIMELINE STRIP ── -->
+<div class="hero-timeline">
+  <div class="hero-timeline-card">
+    <div class="hero-tl-label">
+      <div class="ht-eyebrow">Engagement Timeline</div>
+      <div class="ht-title">What happens next.</div>
+    </div>
+    <div class="ht-step cta">
+      <div class="ht-step-num">Step 01</div>
+      <div class="ht-step-title">Pricing Proposal Review</div>
+      <div class="ht-step-date">Zander and Paul walk through the property-by-property pricing model</div>
+      <div class="ht-step-cta">
+        <a href="#booking" class="btn btn-primary" style="font-size:12px;padding:8px 14px;">Schedule Now <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="ht-step">
+      <div class="ht-step-num">Step 02</div>
+      <div class="ht-step-title">Contract Review</div>
+      <div class="ht-step-date">Reeco issues final MSA; GF legal reviews</div>
+      <div class="ht-step-date" style="font-weight:var(--fw-bold);color:var(--navy-900);margin-top:4px;">August 2026</div>
+    </div>
+    <div class="ht-step">
+      <div class="ht-step-num">Step 03</div>
+      <div class="ht-step-title">Kickoff</div>
+      <div class="ht-step-date">Integration credentials configured; M3 + ProfitSword sync goes live</div>
+      <div class="ht-step-date" style="font-weight:var(--fw-bold);color:var(--navy-900);margin-top:4px;">September 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 02: PROBLEM & SOLUTION ── -->
+<section id="problem" data-screen-label="Problem & Solution">
+  <div class="container">
+    <div class="eyebrow">Section 02 / Business Case + Proposed Solution</div>
+    <h2 class="section-title">The Problem You're Solving — and How Reeco Closes It.</h2>
+    <p class="section-sub">Three pain points. Three direct answers.</p>
+
+    <!-- Pair 01 -->
+    <div class="ps-pair reveal">
+      <div class="ps-num">01</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <h3 class="ps-headline">Double-Entry Finance Work Draining Your Team</h3>
+        <p class="ps-body">Every GF property manager maintains a manual PO log or Excel checkbook, then turns around and re-enters that same data into ProfitSword. Your finance team does the work twice — once to control spending, once to report it. That's not a process problem. It's a structural gap in your tools.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <h3 class="ps-headline">One Entry. Two Systems. Live.</h3>
+        <p class="ps-body">Reeco pushes open PO data directly into ProfitSword's committed-spend area in real time. The moment an order is placed in Reeco, it's visible in ProfitSword's checkbook view — no manual re-entry, no lag, no reconciliation at month-end.</p>
+      </div>
+    </div>
+
+    <!-- Pair 02 -->
+    <div class="ps-pair reveal">
+      <div class="ps-num">02</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <h3 class="ps-headline">AP That Requires Babysitting</h3>
+        <p class="ps-body">Current systems can automate invoices until a line item touches multiple GL codes — then the logic breaks and someone has to step in. If your AP tool can't tell the difference between Hormel going to complimentary breakfast and Berry Foods going to cost of food sales, you don't have automated AP. You have AP you have to supervise.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <h3 class="ps-headline">Intelligent GL Coding That Learns</h3>
+        <p class="ps-body">Reeco codes invoices by role and item — not just by vendor. The housekeeping director ordering gloves codes to a different GL than the F&amp;B director ordering the same item. The system learns each user's coding pattern over time, so it gets faster and more accurate with every invoice processed. Unlimited invoices, no per-invoice charge.</p>
+      </div>
+    </div>
+
+    <!-- Pair 03 -->
+    <div class="ps-pair reveal">
+      <div class="ps-num">03</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <h3 class="ps-headline">One Platform That Has to Work for Every Property</h3>
+        <p class="ps-body">A 78-room Fairfield in a tertiary market running $109 ADR has completely different economics than a 700-key Renaissance Baltimore doing $5M a month. Most platforms are built for one or the other. Flat enterprise pricing for a portfolio this diverse doesn't pencil — and neither does a tool too complex for a limited-service front desk.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <h3 class="ps-headline">Module Flexibility. Flat Per-Property Fee.</h3>
+        <p class="ps-body">Reeco prices per property, not per user. Unlimited seats are included. Full-service properties can run Purchasing + AP + Inventory + Culinary; limited-service properties get Purchasing + AP at a rate that works for a tertiary market. The platform adapts to the property — not the other way around.</p>
+      </div>
+    </div>
+
+    <!-- PRE-PUBLISH: Replace with quote from Notion ROI Quote Repository (financial outcome — budget visibility, ProfitSword checkbook, spend variance) — see checklist item #1 -->
+    <div class="callout-quote reveal">
+      <div class="callout-mark">"</div>
+      <div class="callout-body">
+        <p>"The expense. The variances on the expense side for our financial statements have tightened up a ton. GMs don't want to have to explain them. So when they're going to make those orders or approve their orders from their department heads and it shows you're 10 percent over in this GL — they're going back and saying, do we really need this?"</p>
+        <div class="callout-attr">
+          <div class="callout-avatar">L5</div>
+          <div>
+            <div class="callout-name">L5 Hospitality</div>
+            <div class="callout-meta">Purchasing &amp; AP — ProfitSword Integration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 03: THE PLATFORM ── -->
+<section id="platform" class="platform-section" data-screen-label="Platform">
+  <div class="container">
+    <div class="eyebrow">Section 03 / The Platform</div>
+    <h2 class="section-title">What's Included.</h2>
+    <p class="section-sub">Four modules. One login. Built for hospitality back-of-house from the ground up.</p>
+
+    <div class="platform-grid">
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <h3>Purchasing &amp; Receiving</h3>
+        </div>
+        <p>Full visibility and control across F&amp;B, housekeeping, engineering, and service agreements. All your suppliers in one connected place — existing partnerships, pricing, and agreements honored. <strong>Mobile receiving</strong> lets your team check in orders on the spot; Reeco handles missing items and credits automatically.</p>
+      </div>
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <h3>AP Automation</h3>
+        </div>
+        <p>Every invoice — organized, <strong>AI-coded by line item</strong>, and ready to sync with your accounting system. What used to take 7–10 minutes per invoice takes about 20 seconds. The coding learns over time, so it gets faster and more accurate the longer you use it.</p>
+      </div>
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <h3>Inventory</h3>
+        </div>
+        <p>Always up-to-date pricing, easy audit setup, and a <strong>mobile-friendly count experience</strong>. Open the app, count by tapping through the list, and your report is ready instantly.</p>
+      </div>
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+          </div>
+          <h3>Culinary Management</h3>
+        </div>
+        <p>Menus connected to recipes. <strong>Clear visibility into food cost by dish</strong> — what's making money, what's costing more than it should, and where to adjust before the next menu cycle.</p>
+      </div>
+    </div>
+
+    <!-- PRE-PUBLISH: Replace with quote from Notion ROI Quote Repository (ease of use / user adoption / platform comparison) — different company from Section 02 — see checklist item #1 -->
+    <div class="callout-quote mint reveal" style="margin-top:48px;">
+      <div class="callout-mark">"</div>
+      <div class="callout-body">
+        <p>"It's so much more user friendly than the platform we were on. And it connects automatically to the other systems. With the live pricing — plus we can build in the other inventory, the linens and the housekeeping, all the guest supplies — into one big platform."</p>
+        <div class="callout-attr">
+          <div class="callout-avatar">TH</div>
+          <div>
+            <div class="callout-name">Tandem Hospitality Group</div>
+            <div class="callout-meta">Platform Comparison — User Adoption</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 04: PRICING ── -->
+<section id="pricing" class="pricing-section" data-screen-label="Pricing">
+  <div class="container">
+    <div class="eyebrow">Section 04 / Pricing</div>
+    <h2 class="section-title">Pricing Structured for Your Portfolio.</h2>
+    <p class="section-sub">The proposal below was prepared for GF Hotels following your June 4 discovery call. Enterprise pricing has been applied across all modules — reflecting GF's full portfolio scale.</p>
+
+    <div class="pricing-v2 reveal">
+
+      <div class="pricing-listprice">
+        <span class="lp-label">List price</span>
+        <span class="lp-item">AP <strong>$150/mo</strong></span><span class="lp-sep">·</span>
+        <span class="lp-item">Purchasing <strong>$500/mo</strong></span><span class="lp-sep">·</span>
+        <span class="lp-item">Inventory <strong>$250/mo</strong></span><span class="lp-sep">·</span>
+        <span class="lp-item">Culinary <strong>$250/mo</strong></span>
+      </div>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Properties</th>
+            <th>AP</th>
+            <th>Purchasing</th>
+            <th>Inventory</th>
+            <th>Culinary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pricing-tier">Full-Service 200+ Rooms<span class="sub">Purchasing + AP + Inventory + Culinary</span></span></td>
+            <td>~39 active</td>
+            <td><span class="pricing-amount">$125 / mo</span><span class="disc-pct">−17% off list</span></td>
+            <td><span class="pricing-amount">$395 / mo</span><span class="disc-pct">−21% off list</span></td>
+            <td><span class="pricing-amount">$200 / mo</span><span class="disc-pct">−20% off list</span></td>
+            <td><span class="pricing-amount">$200 / mo</span><span class="disc-pct">−20% off list</span></td>
+          </tr>
+          <tr>
+            <td><span class="pricing-tier">Full-Service Under 200 Rooms<span class="sub">Purchasing + AP + Inventory + Culinary</span></span></td>
+            <td>~36 active</td>
+            <td><span class="pricing-amount">$125 / mo</span><span class="disc-pct">−17% off list</span></td>
+            <td><span class="pricing-amount">$265 / mo</span><span class="disc-pct">−47% off list</span></td>
+            <td><span class="pricing-amount">$200 / mo</span><span class="disc-pct">−20% off list</span></td>
+            <td><span class="pricing-amount">$200 / mo</span><span class="disc-pct">−20% off list</span></td>
+          </tr>
+          <tr>
+            <td><span class="pricing-tier">Select-Service 100+ Rooms<span class="sub">Purchasing + AP default; Inventory available</span></span></td>
+            <td>~25 active</td>
+            <td><span class="pricing-amount">$100 / mo</span><span class="disc-pct">−33% off list</span></td>
+            <td><span class="pricing-amount">$225 / mo</span><span class="disc-pct">−55% off list</span></td>
+            <td><span class="pricing-amount">$100 / mo</span><span class="disc-pct">−60% off list</span></td>
+            <td><span class="optional-chip">Optional</span></td>
+          </tr>
+          <tr>
+            <td><span class="pricing-tier">Select-Service Under 100 Rooms<span class="sub">Purchasing + AP default; Inventory available</span></span></td>
+            <td>~32 active</td>
+            <td><span class="pricing-amount">$100 / mo</span><span class="disc-pct">−33% off list</span></td>
+            <td><span class="pricing-amount">$160 / mo</span><span class="disc-pct">−68% off list</span></td>
+            <td><span class="pricing-amount">$100 / mo</span><span class="disc-pct">−60% off list</span></td>
+            <td><span class="optional-chip">Optional</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="setup-waived-banner">
+        <div class="setup-waived-header">
+          <div class="setup-waived-headline">
+            <div class="setup-waived-eyebrow">/// Included at no cost</div>
+            <div class="setup-waived-title">All property setup fees waived.</div>
+            <div class="setup-waived-sub">Credited on the proposal at contract execution — no upfront implementation cost across the full GF portfolio.</div>
+          </div>
+          <div class="setup-waived-total">
+            <div class="setup-waived-total-val">$103,500</div>
+            <div class="setup-waived-total-label">Total value waived</div>
+          </div>
+        </div>
+        <div class="setup-waived-tiers">
+          <div class="setup-waived-tier">
+            <div class="swt-label">Full-Service Properties</div>
+            <div class="swt-math"><strong>75 properties</strong> × $1,000 / property</div>
+            <div class="swt-total">$75,000 waived</div>
+          </div>
+          <div class="setup-waived-tier">
+            <div class="swt-label">Select-Service Properties</div>
+            <div class="swt-math"><strong>57 properties</strong> × $500 / property</div>
+            <div class="swt-total">$28,500 waived</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-terms">
+        <div class="pricing-terms-item">
+          <span class="lbl">Initial Term</span>
+          <span class="val">24 Months</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Billing</span>
+          <span class="val">Quarterly</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Payment Terms</span>
+          <span class="val">Net 30</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Renewal</span>
+          <span class="val">Auto-Renews in 12-Month Increments</span>
+        </div>
+      </div>
+
+      <div class="pricing-embed-label">
+        <div class="pricing-embed-eyebrow">/// Property-by-Property Breakdown</div>
+        <div class="pricing-embed-desc">Toggle modules on or off for each property. Portfolio totals update live.</div>
+        <a href="https://zanders-commits.github.io/gf-pricing/GF_Hotels_Interactive_Pricing.html" target="_blank" rel="noopener" class="pricing-embed-popout">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open in new tab
+        </a>
+      </div>
+      <div class="pricing-iframe-wrap">
+        <iframe src="https://zanders-commits.github.io/gf-pricing/GF_Hotels_Interactive_Pricing.html" class="pricing-iframe" title="GF Hotels Interactive Pricing Proposal" loading="lazy" allowfullscreen></iframe>
+      </div>
+
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:16px;font-style:italic;">Full-service properties default to Purchasing + AP + Inventory + Culinary. Select-service properties default to Purchasing + AP. All module configurations are adjustable per property in the tool above.</p>
+  </div>
+</section>
+
+<!-- ── SECTION 05: INTEGRATION & IMPLEMENTATION ── -->
+<section id="integration" class="integration-section" data-screen-label="Integration & Implementation">
+  <div class="container">
+    <div class="eyebrow">Section 05 / Integration &amp; Implementation</div>
+    <h2 class="section-title">How We Connect and How We Go Live.</h2>
+    <p class="section-sub">A typical Reeco enterprise rollout for a full-service and select-service portfolio — a plan specific to GF Hotels will be presented at the proposal review meeting.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card connect reveal">
+        <div class="stack-card-type">Accounting System</div>
+        <div class="stack-card-name">M3<br><span style="font-size:13px;font-weight:var(--fw-medium);color:var(--stone-600);">M3 Acknowledge</span></div>
+        <div class="stack-status connect">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Direct Automatic
+        </div>
+        <div class="stack-detail">Two-way data sync once web services credentials are configured. Reeco's M3 integration is real-time and bidirectional — invoice data flows to M3 immediately after processing, open PO data is available via API continuously.</div>
+      </div>
+      <div class="stack-card connect reveal">
+        <div class="stack-card-type">Budget &amp; F&amp;B</div>
+        <div class="stack-card-name">ProfitSword</div>
+        <div class="stack-status connect">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Two-Way
+        </div>
+        <div class="stack-detail">Reeco pushes open PO data into ProfitSword's committed/tentative spend area — so your checkbook is complete before invoices arrive. After invoice processing, actuals flow to both M3 and ProfitSword. Budget and GL data flow back to Reeco to power the spend-against-forecast view at the property level.</div>
+      </div>
+      <div class="stack-card replace reveal">
+        <div class="stack-card-type">Purchasing Platform</div>
+        <div class="stack-card-name">BirchStreet Systems</div>
+        <div class="stack-status replace">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Replacing
+        </div>
+        <div class="stack-detail">Reeco replaces BirchStreet as the purchasing and AP platform — bringing the Amazon-style ordering experience, real-time GL coding, three-way match, and ProfitSword checkbook integration that BirchStreet's architecture does not support.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:22px;font-weight:var(--fw-bold);color:var(--navy-900);margin:0 0 14px;letter-spacing:-0.01em;">Implementation Approach</h3>
+    <p style="font-size:15px;line-height:1.6;color:var(--stone-700);margin:0 0 20px;max-width:640px;">Reeco's onboarding team manages the integration setup and property configuration. Implementation does not require a dedicated full-time resource on your team.</p>
+
+    <div class="impl-list">
+      <div class="impl-item reveal">
+        <div class="impl-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="impl-text"><strong>No Dedicated FTE Required</strong> from your team to manage the rollout.</div>
+      </div>
+      <div class="impl-item reveal">
+        <div class="impl-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="impl-text"><strong>M3 + ProfitSword Integrations Active</strong> from day one — GF is already a customer of both.</div>
+      </div>
+      <div class="impl-item reveal">
+        <div class="impl-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="impl-text"><strong>Phased Rollout by Property Type</strong> — select-service properties first (simpler setup), then full-service.</div>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-header"><h3>Rollout Sequence</h3></div>
+      <div class="timeline-rows">
+        <div class="timeline-row">
+          <div class="t-phase"><span class="dot"></span>Phase 0</div>
+          <div class="t-activity">Contract Execution + Kickoff<span>M3 web services credentials configured; ProfitSword API connection established; GF corporate team onboarded.</span></div>
+        </div>
+        <div class="timeline-row">
+          <div class="t-phase"><span class="dot"></span>Phase 1</div>
+          <div class="t-activity">Select-Service Properties<span>Simpler module set (Purchasing + AP), faster adoption, builds momentum.</span></div>
+        </div>
+        <div class="timeline-row">
+          <div class="t-phase"><span class="dot"></span>Phase 2</div>
+          <div class="t-activity">Full-Service Properties<span>Add Inventory and Culinary layer; GL coding patterns established from Phase 1.</span></div>
+        </div>
+        <div class="timeline-row">
+          <div class="t-phase"><span class="dot"></span>Ongoing</div>
+          <div class="t-activity">Payments<span>M3 + Corpay payment integration available by the time Phase 1 rollout begins.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 06: COLLATERAL LIBRARY ── -->
+<section id="library" data-screen-label="Collateral Library">
+  <div class="container">
+    <div class="eyebrow">Section 06 / Collateral Library</div>
+    <h2 class="section-title">Everything in One Place.</h2>
+    <p class="section-sub">Background materials Keith, Patrick, Eric, and Derek can review ahead of the proposal meeting.</p>
+
+    <div class="collateral-grid">
+      <a class="collateral-card reveal" href="https://docs.google.com/presentation/d/1fdHMbo0BFTGzjTDIy8RWjoeUFBz8W0NOuKmx5jJ1HVg/edit" target="_blank" rel="noopener">
+        <div class="collateral-icon deck">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="collateral-body">
+          <div class="collateral-title">Reeco Platform Overview →</div>
+          <div class="collateral-desc">Visual walkthrough of the full Reeco platform — purchasing, AP automation, inventory, culinary, integrations, and customer results.</div>
+        </div>
+        <svg class="collateral-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <!-- PRE-PUBLISH: GF does not allow AI recording. Replace this card with Zander's notes summary or an alternative asset — see checklist item #3 -->
+      <div class="collateral-card no-link reveal" style="cursor:default;">
+        <div class="collateral-icon notes">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="collateral-body">
+          <div class="collateral-title">June 4 Discovery Call</div>
+          <div class="collateral-desc">Recording of the full demo with Keith Schreiner, Patrick McLaughlin, Eric Regits, and Lisa Quatrano (M3). <em style="color:var(--sun-500);font-style:normal;font-weight:var(--fw-semi);">Link to be confirmed — see pre-publish checklist.</em></div>
+        </div>
+        <svg class="collateral-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+
+      <a class="collateral-card reveal" href="#pricing">
+        <div class="collateral-icon pricing">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="collateral-body">
+          <div class="collateral-title">Interactive Pricing Proposal →</div>
+          <div class="collateral-desc">Full property-by-property pricing for the GF portfolio — toggle modules on or off for each property and see the portfolio total update live.</div>
+        </div>
+        <svg class="collateral-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <div class="collateral-card no-link reveal">
+        <div class="collateral-icon lock">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="collateral-body">
+          <div class="collateral-title">SOC 2 Type II Documentation</div>
+          <div class="collateral-desc">Available upon request — email <a href="mailto:zanders@reeco.com" style="color:var(--mint-700);font-weight:var(--fw-semi);">zanders@reeco.com</a> and we'll send the report within 24 hours.</div>
+        </div>
+        <svg class="collateral-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 07: FAQs ── -->
+<section id="faq" class="faq-section" data-screen-label="FAQs">
+  <div class="container">
+    <div class="eyebrow">Section 07 / FAQs</div>
+    <h2 class="section-title">Questions We Expect — Answered Directly.</h2>
+    <p class="section-sub">If something's missing, email Zander and we'll add it before the proposal meeting.</p>
+
+    <div class="faq-list">
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"We just finished a major implementation year with M3 and ProfitSword. We don't want another botched rollout."</span>
+          <span class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Understood — and we take that seriously. Reeco does not require a dedicated full-time resource to manage implementation. Because GF is already an M3 and ProfitSword customer, both integrations configure in days, not weeks. There's no re-mapping of your chart of accounts, no new GL structure — your USAli v12 standardization works with Reeco exactly as-is. We'll present a full, property-specific rollout plan at the proposal meeting.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"Will the ProfitSword integration actually replace the manual checkbook process?"</span>
+          <span class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Yes — and here's exactly how it works. The moment a purchase order is placed in Reeco, the open PO data flows into ProfitSword's tentative/committed spend area. Your GMs see the checkbook view in ProfitSword complete — posted actuals, open commitments, and forecasted spend in one place — without any manual double-entry. Once invoices process, they go to both M3 and ProfitSword simultaneously. The invoice image is accessible directly inside ProfitSword when you drill into a GL code.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"How does the approval workflow handle a diverse portfolio — from a highway hotel to a flagship property?"</span>
+          <span class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Approvals are configured per property, not globally. Each property can have independent thresholds — trigger on dollar amount, percentage over forecast, or both. You can also set notifications without requiring formal approval if you want visibility without slowing operations down. Out-of-office approval delegation is on the product roadmap; the current workaround is adding a backup approver at the same level. We'll include roadmap timing in the proposal materials.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"What about property-level access and regional views for our operations team?"</span>
+          <span class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Every user is given access to the specific properties they're responsible for. A regional VP can be scoped to their cluster of hotels with a dynamic filter view. Corporate-level portfolio grouping (regional P&amp;L-style views) is on the near-term roadmap — the data exists in the system today, it's a filtering and display layer. We'll present the current state and roadmap at the proposal meeting.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"What does security look like?"</span>
+          <span class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Reeco is <strong>SOC 2 Type II certified.</strong> Available upon request — email <a href="mailto:zanders@reeco.com">zanders@reeco.com</a> and we'll send the report within 24 hours.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 08: CONTACT ── -->
+<section id="booking" class="contact-section" data-screen-label="Contact">
+  <div class="container">
+    <div class="eyebrow">Section 08 / Your Reeco Team</div>
+    <h2 class="section-title">Questions Before the Meeting?</h2>
+    <p class="section-sub">Reach out directly — no sales queue, no ticket system.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="contact-avatar">ZS</div>
+          <div>
+            <div class="contact-name">Zander Srodes</div>
+            <div class="contact-role">Head of Enterprise Sales</div>
+          </div>
+        </div>
+        <a href="mailto:zanders@reeco.com" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          zanders@reeco.com
+        </a>
+        <!-- PRE-PUBLISH: Insert Zander's calendar link below — see checklist item #4 -->
+        <a href="#booking" class="contact-link" style="margin-top:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Schedule a call →
+        </a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="contact-avatar">PB</div>
+          <div>
+            <div class="contact-name">Paul Bennie</div>
+            <div class="contact-role">SVP Revenue and Customer Success</div>
+          </div>
+        </div>
+        <a class="contact-link" href="mailto:paulb@reeco.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          paulb@reeco.com
+        </a>
+      </div>
+    </div>
+
+    <div class="booking-card">
+      <div>
+        <h3>Ready to walk through the pricing?</h3>
+        <p>Schedule 30 minutes with Zander and Paul. We'll walk through the property-by-property model and answer every question before you sign anything.</p>
+      </div>
+      <div class="booking-cta">
+        <!-- PRE-PUBLISH: Replace href with Zander's calendar link — see checklist item #4 -->
+        <a href="#booking" class="btn btn-dark btn-lg">Schedule 30 Minutes with Zander <span class="arr">→</span></a>
+        <span class="booking-sub">30 min · Zander Srodes + Paul Bennie</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/reeco-logo-primary-green.svg" alt="Reeco">
+    </div>
+    <div class="footer-note">This digital sales room was prepared for GF Hotels ahead of the pricing proposal review. Questions? Email <a href="mailto:zanders@reeco.com" style="color:var(--mint-700);">zanders@reeco.com</a>.</div>
+    <div class="footer-links">
+      <a href="https://www.reeco.com" target="_blank" rel="noopener">reeco.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
